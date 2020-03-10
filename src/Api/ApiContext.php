@@ -4,6 +4,7 @@ interface ApiContext
 {
 
     function newCall($method, $payload);
-    
+
     function testApiAvailability();
+
 }

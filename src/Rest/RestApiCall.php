@@ -31,12 +31,12 @@ class RestApiCall implements ApiCall
 
         if ($this->getDebug()) {
             ConsoleLog::i()
-                ->section('cURL request: POST '.$this->url)
-                ->info($this->url.'&wsfunction='.$this->method.'&'.$payloadQueryString);
+                ->section('cURL request: POST ' . $this->url)
+                ->info($this->url . '&wsfunction=' . $this->method . '&' . $payloadQueryString);
         }
-        
+
         curl_setopt_array($curl, [
-            CURLOPT_URL => $this->url.'&wsfunction='.$this->method.'&'.$payloadQueryString,
+            CURLOPT_URL => $this->url . '&wsfunction=' . $this->method . '&' . $payloadQueryString,
             CURLOPT_USERAGENT => 'agurz/moodle-php-sdk',
             CURLOPT_HTTPHEADER => [
                 'Content-Type: text/plain',
@@ -58,8 +58,8 @@ class RestApiCall implements ApiCall
             ConsoleLog::i()
                 ->section('cURL response')
                 ->info($response)
-                ->infoAnx('INFO: '.json_encode($info))
-                ->infoAnx('ERR: '.$err);
+                ->infoAnx('INFO: ' . json_encode($info))
+                ->infoAnx('ERR: ' . $err);
         }
 
         curl_close($curl);
@@ -95,4 +95,5 @@ class RestApiCall implements ApiCall
         $this->responseType = $responseType;
         return $this;
     }
+
 }

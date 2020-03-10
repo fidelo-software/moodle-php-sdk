@@ -6,6 +6,8 @@ use MoodleSDK\Util\Reflection;
 abstract class ModelBase
 {
 
+    protected $rawData;
+
     public function __construct()
     {
     }
@@ -19,10 +21,15 @@ abstract class ModelBase
 
     public function fromArray($data)
     {
+        $this->rawData = (array)$data;
+
         foreach ($data as $k => $v) {
+
             if (!method_exists($this, 'fromArrayExcludedProperties') || !in_array($k, $this->fromArrayExcludedProperties())) {
+
                 if (is_array($v)) {
                     $itemType = Reflection::getPropertyType($this, $k);
+                    if ($itemType == null) continue; // ignore property if there is not in model
                     $items = [];
 
                     foreach ($v as $v_i) {
@@ -43,13 +50,20 @@ abstract class ModelBase
                         $this->{$method}($v);
                     }
                 }
+
             }
+
         }
     }
 
     public function fromJSON($data)
     {
         $this->fromArray(json_decode($data));
+    }
+
+    public function getRaw()
+    {
+        return $this->rawData;
     }
 
     public function fromObject($object)

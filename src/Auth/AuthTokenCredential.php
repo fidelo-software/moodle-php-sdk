@@ -12,6 +12,7 @@ class AuthTokenCredential implements Credential
 
     public function toQueryStringParam()
     {
-        return 'wstoken='.$this->token;
+        return 'wstoken=' . $this->token;
     }
+
 }

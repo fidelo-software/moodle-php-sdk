@@ -40,10 +40,19 @@ class Course extends ModelBase implements ModelCRUD
 
     public function get(ApiContext $apiContext)
     {
-        $json = $this->apiCall($apiContext, 'core_course_get_courses_by_field', [
-            'field' => 'shortname',
-            'value' => $this->getShortName()
-        ]);
+        if ($this->getId()) {
+            $json = $this->apiCall($apiContext, 'core_course_get_courses_by_field', [
+                'field' => 'id',
+                'value' => $this->getId()
+            ]);
+        } else if ($this->getShortName()) {
+            $json = $this->apiCall($apiContext, 'core_course_get_courses_by_field', [
+                'field' => 'shortname',
+                'value' => $this->getShortName()
+            ]);
+        } else {
+            throw new \Exception("Fill course data to search it");
+        }
 
         $results = json_decode($json);
 
@@ -88,7 +97,7 @@ class Course extends ModelBase implements ModelCRUD
 
         return $json;
     }
- 
+
     public function update(ApiContext $apiContext)
     {
         $json = $this->apiCall($apiContext, 'core_course_update_courses', [
@@ -114,7 +123,7 @@ class Course extends ModelBase implements ModelCRUD
         $json = $this->apiCall($apiContext, 'core_enrol_get_enrolled_users', [
             'courseid' => $this->getId()
         ]);
-        
+
         $userList = new UserList();
         $userList->fromJSON($json);
 
@@ -126,15 +135,15 @@ class Course extends ModelBase implements ModelCRUD
         $json = $this->apiCall($apiContext, 'enrol_manual_enrol_users', [
             'enrolments' => [
                 Enrolment::instance()
-                                ->setCourseId($this->getId())
-                                ->setUserId($user->getId())
-                                ->setRoleId($roleId)
-                                ->setTimeStart(null)
-                                ->setTimeEnd(null)
-                                ->toArray()
+                    ->setCourseId($this->getId())
+                    ->setUserId($user->getId())
+                    ->setRoleId($roleId)
+                    ->setTimeStart(null)
+                    ->setTimeEnd(null)
+                    ->toArray()
             ]
         ]);
-        
+
         return json_decode($json);
     }
 
@@ -143,10 +152,10 @@ class Course extends ModelBase implements ModelCRUD
         $json = $this->apiCall($apiContext, 'enrol_manual_unenrol_users', [
             'enrolments' => [
                 Enrolment::instance()
-                                ->setCourseId($this->getId())
-                                ->setUserId($user->getId())
-                                ->setRoleId($roleId)
-                                ->toArray()
+                    ->setCourseId($this->getId())
+                    ->setUserId($user->getId())
+                    ->setRoleId($roleId)
+                    ->toArray()
             ]
         ]);
 
@@ -290,7 +299,7 @@ class Course extends ModelBase implements ModelCRUD
         $this->overviewFiles = $overviewFiles;
         return $this;
     }
-    
+
     public function getCategoryId()
     {
         return $this->categoryId;
@@ -390,3 +399,4 @@ class Course extends ModelBase implements ModelCRUD
     }
 
 }
+

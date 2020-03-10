@@ -20,10 +20,11 @@ class RestApiCallTest extends ContextTestCase
     }
 
     /**
-    * @dataProvider callProvider
-    */
+     * @dataProvider callProvider
+     */
     public function testExecute($call)
     {
         $this->assertInternalType('string', $call->execute());
     }
+
 }

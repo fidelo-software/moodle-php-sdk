@@ -4,4 +4,5 @@ interface Credential
 {
 
     function toQueryStringParam();
+
 }

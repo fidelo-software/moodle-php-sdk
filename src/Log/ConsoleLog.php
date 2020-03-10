@@ -12,15 +12,15 @@ class ConsoleLog extends Log
 
     protected function render()
     {
-        echo EOL.'--- DEBUG INFO ---'.EOL.EOL;
+        echo EOL . '--- DEBUG INFO ---' . EOL . EOL;
         foreach ($this->lines as $line) {
-            echo $line.EOL;
+            echo $line . EOL;
         }
     }
 
     public function section($title)
     {
-        $this->lines[] = EOL.date_format(new \DateTime(), 'Y-m-d h:i:s').' '.$title.EOL;
+        $this->lines[] = EOL . date_format(new \DateTime(), 'Y-m-d h:i:s') . ' ' . $title . EOL;
         return $this;
     }
 
@@ -28,20 +28,21 @@ class ConsoleLog extends Log
     {
         if (is_string($data)) {
             $this->lines[] = $data;
-        } elseif (is_array($data)) {
+        } else if (is_array($data)) {
             foreach ($data as $d) {
                 $this->info($d);
             }
         } else {
             $this->lines[] = json_encode($data);
         }
-        
+
         return $this;
     }
 
     public function infoAnx($data)
     {
-        $this->lines[] = EOL."\t".$data.EOL;
+        $this->lines[] = EOL . "\t" . $data . EOL;
         return $this;
     }
+
 }

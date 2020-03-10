@@ -79,4 +79,5 @@ class Enrolment extends ModelBase
         $this->suspend = $suspend;
         return $this;
     }
+
 }

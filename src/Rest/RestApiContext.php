@@ -37,8 +37,8 @@ class RestApiContext implements ApiContext
     {
         $scheme = $this->getPort() === 443 ? 'https' : 'http';
         $credentialParam = $this->credential->toQueryStringParam();
-        $responseTypeParam = 'moodlewsrestformat='.$this->getResponseType();
-        return $scheme.'://'.$this->getUrl().'/webservice/rest/server.php?'.$responseTypeParam.'&'.$credentialParam;
+        $responseTypeParam = 'moodlewsrestformat=' . $this->getResponseType();
+        return $scheme . '://' . $this->getUrl() . '/webservice/rest/server.php?' . $responseTypeParam . '&' . $credentialParam;
     }
 
     public function testApiAvailability()
@@ -46,10 +46,10 @@ class RestApiContext implements ApiContext
         $errno = 0;
         $errstr = '';
 
-        $socket = fsockopen($this->protocol.'://'.$this->getHost(), $this->getPort(), $errno, $errstr);
+        $socket = fsockopen($this->protocol . '://' . $this->getHost(), $this->getPort(), $errno, $errstr);
 
         if (!$socket) {
-            trigger_error('API is unavailable. Cannot connect to '.$this->getUrl(), E_USER_ERROR);
+            trigger_error('API is unavailable. Cannot connect to ' . $this->getUrl(), E_USER_ERROR);
         }
 
         return true;
@@ -115,7 +115,7 @@ class RestApiContext implements ApiContext
     public function getUrl()
     {
         $url = $this->getHost();
-        $url .= ':'.$this->getPort();
+        $url .= ':' . $this->getPort();
         $url .= $this->getPath();
         return $url;
     }
@@ -125,11 +125,11 @@ class RestApiContext implements ApiContext
         $components = parse_url($url);
 
         $this->setHost($components['host'] ?: $components['path']);
-        $this->setPath($components['path'] ?: '');
-        $this->setPort((int)$components['port'] ?: 0);
+        $this->setPath(isset($components['path']) ? $components['path'] : '');
+        $this->setPort(isset($components['port']) ? (int)$components['port'] : 0);
 
         if (!$this->getPort()) {
-            $scheme = $components['scheme'] ?: 'http';
+            $scheme = isset($components['scheme']) ? $components['scheme'] : 'http';
             $port = $scheme === 'https' ? 443 : 80;
             $this->setPort($port);
         }
@@ -145,7 +145,7 @@ class RestApiContext implements ApiContext
     public function setResponseType($responseType)
     {
         if (!in_array($responseType, self::RESPONSE_TYPE_ALLOWED)) {
-            throw new Exception('Invalid $responseType value. Supported values are: '.implode(', ', self::RESPONSE_TYPE_ALLOWED));
+            throw new Exception('Invalid $responseType value. Supported values are: ' . implode(', ', self::RESPONSE_TYPE_ALLOWED));
         }
 
         $this->responseType = $responseType;
@@ -159,4 +159,5 @@ class RestApiContext implements ApiContext
     {
         return new RestApiContext();
     }
+
 }

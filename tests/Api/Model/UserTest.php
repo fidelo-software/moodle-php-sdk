@@ -10,7 +10,7 @@ use MoodleSDK\Tests\Common\ContextTestCase;
 
 use PHPUnit\Framework\TestCase;
 
-define(TEST_USERNAME, 'test'.md5('agurz/Moodle-PHP-SDK'));
+define(TEST_USERNAME, 'test' . md5('agurz/Moodle-PHP-SDK'));
 
 /**
  * @covers User
@@ -26,21 +26,21 @@ class UserTest extends ContextTestCase
     }
 
     /**
-    * @dataProvider contextProvider
-    */
+     * @dataProvider contextProvider
+     */
     public function testGet($context)
     {
         $this->user
-                ->setUsername('admin')
-                ->get($context);
+            ->setUsername('admin')
+            ->get($context);
 
         $this->assertNotEmpty($this->user->getId());
     }
 
     /**
-    * @dataProvider contextProvider
-    * @depends testGet
-    */
+     * @dataProvider contextProvider
+     * @depends      testGet
+     */
     public function testCreate($context)
     {
         $this->user
@@ -51,15 +51,15 @@ class UserTest extends ContextTestCase
             ->setFullName('TestFullName')
             ->setEmail('test@example.com')
             ->create($context);
-        
+
         $this->assertNotEmpty(User::instance()->setUsername(TEST_USERNAME)->get($context)->getId());
     }
 
     /**
-    * @dataProvider contextProvider
-    * @depends testCreate
-    * @depends testGet
-    */
+     * @dataProvider contextProvider
+     * @depends      testCreate
+     * @depends      testGet
+     */
     public function testUpdate($context)
     {
         $this->user
@@ -79,31 +79,32 @@ class UserTest extends ContextTestCase
     }
 
     /**
-    * @dataProvider contextProvider
-    * @depends testCreate
-    * @depends testUpdate
-    */
+     * @dataProvider contextProvider
+     * @depends      testCreate
+     * @depends      testUpdate
+     */
     public function testDelete($context)
     {
         $this->user
             ->setUsername(TEST_USERNAME)
             ->get($context)
             ->delete($context);
-        
+
         $this->assertEmpty(User::instance()->setUsername(TEST_USERNAME)->get($context)->getId());
     }
 
     /**
-    * @dataProvider contextProvider
-    */
+     * @dataProvider contextProvider
+     */
     public function testAllCourses($context)
     {
         $courseList = $this->user
-                            ->setUsername(TEST_USERNAME)
-                            ->get($context)
-                            ->allCourses($context);
-        
+            ->setUsername(TEST_USERNAME)
+            ->get($context)
+            ->allCourses($context);
+
         $this->assertInstanceOf(CourseList::class, $courseList);
         $this->assertGreaterThan(0, count($courseList));
     }
+
 }

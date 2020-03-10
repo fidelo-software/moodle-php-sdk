@@ -4,8 +4,9 @@ abstract class ModelBaseList extends ModelBase implements \ArrayAccess, \Countab
 {
 
     protected $list = [];
+    protected $rawData = [];
 
-    abstract public function all(ApiContext $apiContext);
+    public abstract function all(ApiContext $apiContext);
 
     // ModelBase Methods
 
@@ -21,6 +22,7 @@ abstract class ModelBaseList extends ModelBase implements \ArrayAccess, \Countab
             $item->fromArray($itemData);
 
             $this->list[] = $item;
+            $this->rawData[] = (array)$itemData;
         }
     }
 
@@ -48,6 +50,11 @@ abstract class ModelBaseList extends ModelBase implements \ArrayAccess, \Countab
     public function offsetUnset($offset)
     {
         unset($this->list[$offset]);
+    }
+
+    public function getRaw()
+    {
+        return $this->rawData;
     }
 
     // Countable Methods

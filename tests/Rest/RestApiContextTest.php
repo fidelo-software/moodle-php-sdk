@@ -25,25 +25,25 @@ class RestApiContextTest extends ContextTestCase
     }
 
     /**
-    * @dataProvider availableContextProvider
-    */
+     * @dataProvider availableContextProvider
+     */
     public function testTestApiAvailability($context)
     {
         $this->assertTrue($context->testApiAvailability());
     }
 
     /**
-    * @dataProvider unavailableContextProvider
-    * @expectedException PHPUnit_Framework_Error
-    */
+     * @dataProvider unavailableContextProvider
+     * @expectedException PHPUnit_Framework_Error
+     */
     public function testTestApiAvailabilityWithUnavailableApi($context)
     {
         $context->testApiAvailability();
     }
 
     /**
-    * @dataProvider availableContextProvider
-    */
+     * @dataProvider availableContextProvider
+     */
     public function testNewCall($context)
     {
         $this->assertInstanceOf(
@@ -51,4 +51,5 @@ class RestApiContextTest extends ContextTestCase
             $context->newCall('test', [])
         );
     }
+
 }

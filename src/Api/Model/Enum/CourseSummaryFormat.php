@@ -7,4 +7,5 @@ abstract class CourseSummaryFormat
     const MarkDown = 4;
     const Moodle = 0;
     const Plain = 2;
+
 }

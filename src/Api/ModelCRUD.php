@@ -8,8 +8,9 @@ interface ModelCRUD
     function get(ApiContext $apiContext);
 
     function create(ApiContext $apiContext);
- 
+
     function update(ApiContext $apiContext);
 
     function delete(ApiContext $apiContext);
+
 }

@@ -7,4 +7,5 @@ abstract class CourseFormat
     const Social = 'social';
     const Topics = 'topics';
     const Weekly = 'weeks';
+
 }

@@ -2,7 +2,7 @@
 
 use MoodleSDK\Api\ModelBase;
 
-class UserPreference extends ModelBase
+class RawData extends ModelBase
 {
 
 }

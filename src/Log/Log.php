@@ -32,7 +32,8 @@ abstract class Log
         return self::getInstance();
     }
 
-    abstract protected static function newInstance();
+    protected abstract static function newInstance();
 
-    abstract protected function render();
+    protected abstract function render();
+
 }

@@ -19,8 +19,8 @@ abstract class ContextTestCase extends TestCase
     {
         if (!$this->context) {
             $this->context = RestApiContext::instance()
-                                ->setUrl(getenv('MOODLE_API_URL'))
-                                ->setCredential(new AuthTokenCredential(getenv('MOODLE_API_TOKEN')));
+                ->setUrl(getenv('MOODLE_API_URL'))
+                ->setCredential(new AuthTokenCredential(getenv('MOODLE_API_TOKEN')));
 
             if (getenv('ENVIRONMENT') === 'development') {
                 $this->context->setDebug(true);
@@ -29,4 +29,5 @@ abstract class ContextTestCase extends TestCase
 
         return $this->context;
     }
+
 }

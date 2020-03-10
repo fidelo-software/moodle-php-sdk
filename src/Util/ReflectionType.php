@@ -10,7 +10,7 @@ class ReflectionType
 
     private $name;
     private $namespace;
-    
+
     public function __construct($name, $contextObject = null)
     {
         $this->name = $name;
@@ -19,7 +19,7 @@ class ReflectionType
             if ($contextObject) {
                 $reflectionClass = new \ReflectionClass($contextObject);
                 $namespace = $reflectionClass->getNamespaceName();
-                $fullQualifiedName = $namespace.'\\'.$name;
+                $fullQualifiedName = $namespace . '\\' . $name;
 
                 if (class_exists($fullQualifiedName)) {
                     $this->name = $name;
@@ -33,7 +33,7 @@ class ReflectionType
         }
 
         if (isset($err)) {
-            throw new \Exception('Cannot resolve type '.$name);
+            throw new \Exception('Cannot resolve type ' . $name);
         }
     }
 
@@ -66,6 +66,7 @@ class ReflectionType
 
     public function getFullName()
     {
-        return ltrim($this->namespace.'\\'.$this->name, '\\');
+        return ltrim($this->namespace . '\\' . $this->name, '\\');
     }
+
 }
