@@ -273,7 +273,7 @@ class Course extends ModelBase implements ModelCRUD
     }
 
     /**
-     * @return File[]
+     * @return \MoodleSDK\Api\Model\File[]
      */
     public function getSummaryFiles()
     {
@@ -287,7 +287,7 @@ class Course extends ModelBase implements ModelCRUD
     }
 
     /**
-     * @return File[]
+     * @return \MoodleSDK\Api\Model\File[]
      */
     public function getOverviewFiles()
     {
@@ -334,7 +334,7 @@ class Course extends ModelBase implements ModelCRUD
     }
 
     /**
-     * @return Contact[]
+     * @return \MoodleSDK\Api\Model\Contact[]
      */
     public function getContacts()
     {
@@ -348,7 +348,7 @@ class Course extends ModelBase implements ModelCRUD
     }
 
     /**
-     * @return CourseFormatOption[]
+     * @return \MoodleSDK\Api\Model\CourseFormatOption[]
      */
     public function getCourseFormatOptions()
     {

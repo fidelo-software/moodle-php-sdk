@@ -235,7 +235,7 @@ class User extends ModelBase implements ModelCRUD
     }
 
     /**
-     * @return UserPreference[]
+     * @return \MoodleSDK\Api\Model\UserPreference[]
      */
     public function getPreferences()
     {
