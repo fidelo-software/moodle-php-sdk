@@ -26,6 +26,30 @@ class CourseList extends ModelBaseList
     }
 
     /**
+     * Fetch all courses with contents
+     *
+     * @param ApiContext $apiContext
+     * @return $this
+     */
+    public function allWithContents(ApiContext $apiContext)
+    {
+        $json = $this->apiCall($apiContext, 'core_course_get_courses', [
+            'options' => [
+                'ids' => [
+                ]
+            ]
+        ]);
+
+        $courses = json_decode($json);
+        $courseIds = [];
+        foreach ($courses as $course) {
+            $courseIds[] = $course->id;
+        }
+
+        return $this->findWithContentsByIds($apiContext, $courseIds);
+    }
+
+    /**
      * Find courses by Ids
      *
      * @param ApiContext $apiContext
@@ -41,6 +65,33 @@ class CourseList extends ModelBaseList
         ]);
 
         $this->fromJSON($json);
+        return $this;
+    }
+
+    /**
+     * Find courses with contents by Ids
+     *
+     * @param ApiContext $apiContext
+     * @param array $courseIds
+     * @return $this
+     */
+    public function findWithContentsByIds(ApiContext $apiContext, array $courseIds)
+    {
+        $json = $this->apiCall($apiContext, 'core_course_get_courses_by_field', [
+            'field' => 'ids',
+            'value' => implode(',', $courseIds)
+        ]);
+
+        $data = json_decode($json); // courses:[], warnings: []
+
+        foreach ($data->courses as $itemData) {
+            $item = new Course();
+            $item->fromArray($itemData);
+
+            $this->list[] = $item;
+            $this->rawData[] = (array)$itemData;
+        }
+
         return $this;
     }
 
