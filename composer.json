@@ -12,12 +12,6 @@
             "email": "dan-leech@mail.ru"
         }
     ],
-    "autoload": {
-        "psr-4": {
-            "MoodleSDK\\": "src/",
-            "MoodleSDK\\Tests\\": "tests/"
-        }
-    },
     "require": {
         "zeptech/annotations": "1.1.0"
     },
@@ -25,5 +19,15 @@
         "nesbot/carbon": "~1.21",
         "phpunit/phpunit": "^5.0",
         "vlucas/phpdotenv": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "MoodleSDK\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MoodleSDK\\Tests\\": "tests/"
+        }
     }
 }
