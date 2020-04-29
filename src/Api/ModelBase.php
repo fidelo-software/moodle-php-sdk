@@ -82,7 +82,13 @@ abstract class ModelBase
         Reflection::forEachGetter($this, function ($method) use (&$arr, $additionalToArrayExcludedProperties) {
             $k = strtolower(substr($method, 3));
 
-            if (!method_exists($this, 'toArrayExcludedProperties') || !in_array($k, $this->toArrayExcludedProperties($additionalToArrayExcludedProperties))) {
+            if(
+				$method !== 'getRaw' &&
+				(
+					!method_exists($this, 'toArrayExcludedProperties') || 
+					!in_array($k, $this->toArrayExcludedProperties($additionalToArrayExcludedProperties))
+				)
+			) {
                 $v = $this->{$method}();
 
                 if (!is_null($v)) {

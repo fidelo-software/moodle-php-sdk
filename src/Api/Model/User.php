@@ -251,7 +251,7 @@ class User extends ModelBase implements ModelCRUD
 
     public function getCustomFields()
     {
-        return $this->preferences;
+        return $this->customfields;
     }
 
     public function setCustomFields($customfields)
