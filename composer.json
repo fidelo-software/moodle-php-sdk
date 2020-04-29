@@ -1,5 +1,5 @@
 {
-    "name": "dan-leech/moodle-php-sdk",
+    "name": "fidelo-software/moodle-php-sdk",
     "description": "PHP SDK for Moodle RESTful APIs",
     "license": "MIT",
     "authors": [
@@ -10,6 +10,10 @@
         {
             "name": "Daniil Kostin",
             "email": "dan-leech@mail.ru"
+        },
+        {
+            "name": "Mark Koopmann",
+            "email": "m.koopmann@fidelo.com"
         }
     ],
     "require": {
