@@ -21,6 +21,7 @@ class User extends ModelBase implements ModelCRUD
     private $fullName;
     private $email;
     private $preferences;
+	private $customfields;
 
     /**
      * @var integer
@@ -34,7 +35,7 @@ class User extends ModelBase implements ModelCRUD
             'values' => [$this->getUsername()]
         ]);
 
-        $results = json_decode($json);
+        $results = json_decode($json, true);
 
         $this->fromObject($results[0]);
 
@@ -56,7 +57,7 @@ class User extends ModelBase implements ModelCRUD
             'values' => [$value]
         ]);
 
-        $results = json_decode($json);
+        $results = json_decode($json, true);
 
         if (empty($results)) {
             return null;
@@ -245,6 +246,17 @@ class User extends ModelBase implements ModelCRUD
     public function setPreferences($preferences)
     {
         $this->preferences = $preferences;
+        return $this;
+    }
+
+    public function getCustomFields()
+    {
+        return $this->preferences;
+    }
+
+    public function setCustomFields($customfields)
+    {
+        $this->customfields = $customfields;
         return $this;
     }
 

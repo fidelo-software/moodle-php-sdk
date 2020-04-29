@@ -1,4 +1,6 @@
-<?php namespace MoodleSDK\Rest;
+<?php 
+
+namespace MoodleSDK\Rest;
 
 use MoodleSDK\Api\ApiCall;
 use MoodleSDK\Log\ConsoleLog;
@@ -51,6 +53,16 @@ class RestApiCall implements ApiCall
 
         $response = curl_exec($curl);
 
+		$json = json_decode($response, true);
+
+		// Catch exception!
+		if(
+			$json !== null &&
+			!empty($json['exception'])
+		) {
+			throw new \MoodleSDK\Util\MoodleException($json['message']);
+		}
+		
         $info = curl_getinfo($curl);
         $err = curl_error($curl);
 
