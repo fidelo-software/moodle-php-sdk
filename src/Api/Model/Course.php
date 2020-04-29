@@ -130,7 +130,7 @@ class Course extends ModelBase implements ModelCRUD
         return $userList;
     }
 
-    public function enrolUser(ApiContext $apiContext, User $user, $roleId)
+    public function enrolUser(ApiContext $apiContext, User $user, $roleId, $timeStart=null, $timeEnd=null)
     {
         $json = $this->apiCall($apiContext, 'enrol_manual_enrol_users', [
             'enrolments' => [
@@ -138,8 +138,8 @@ class Course extends ModelBase implements ModelCRUD
                     ->setCourseId($this->getId())
                     ->setUserId($user->getId())
                     ->setRoleId($roleId)
-                    ->setTimeStart(null)
-                    ->setTimeEnd(null)
+                    ->setTimeStart($timeStart)
+                    ->setTimeEnd($timeEnd)
                     ->toArray()
             ]
         ]);
