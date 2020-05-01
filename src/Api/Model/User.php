@@ -16,6 +16,7 @@ class User extends ModelBase implements ModelCRUD
     private $auth;
     private $username;
     private $password;
+    private $createpassword;
     private $firstName;
     private $lastName;
     private $fullName;
@@ -191,6 +192,17 @@ class User extends ModelBase implements ModelCRUD
         return $this;
     }
 
+    public function getCreatePassword()
+    {
+        return $this->createpassword;
+    }
+
+    public function setCreatePassword($createpassword)
+    {
+        $this->createpassword = $createpassword;
+        return $this;
+    }
+
     public function getFirstName()
     {
         return $this->firstName;
@@ -249,6 +261,9 @@ class User extends ModelBase implements ModelCRUD
         return $this;
     }
 
+	/**
+	 * @return \MoodleSDK\Api\Model\CustomField[]
+	 */
     public function getCustomFields()
     {
         return $this->customfields;

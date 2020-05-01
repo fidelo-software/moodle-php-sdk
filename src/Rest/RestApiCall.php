@@ -59,7 +59,7 @@ class RestApiCall implements ApiCall
 		if(
 			$json !== null &&
 			!empty($json['exception'])
-		) {
+		) {			
 			$e = new \MoodleSDK\Util\MoodleException($json['message']);
 			$e->setMethod($this->method);
 			$e->setPayload($this->payload);
