@@ -29,6 +29,9 @@ class User extends ModelBase implements ModelCRUD
      */
     private $suspended;
 
+	protected const FUNCTIONS_GET = 'core_user_get_users';
+	protected const FUNCTIONS_GET_BY_FIELD = 'core_user_get_users_by_field';
+
     public function get(ApiContext $apiContext)
     {
         $json = $this->apiCall($apiContext, 'core_user_get_users_by_field', [

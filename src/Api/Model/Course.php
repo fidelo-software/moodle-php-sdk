@@ -38,6 +38,9 @@ class Course extends ModelBase implements ModelCRUD
      */
     private $courseFormatOptions;
 
+	protected const FUNCTIONS_GET = 'core_course_get_courses';
+	protected const FUNCTIONS_GET_BY_FIELD = 'core_course_get_courses_by_field';
+
     public function get(ApiContext $apiContext)
     {
         if ($this->getId()) {
@@ -95,7 +98,9 @@ class Course extends ModelBase implements ModelCRUD
             ]
         ]);
 
-        return $json;
+		$results = json_decode($json, true);
+		
+        return $results[0];
     }
 
     public function update(ApiContext $apiContext)

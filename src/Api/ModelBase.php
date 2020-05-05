@@ -8,6 +8,9 @@ abstract class ModelBase
 
     protected $rawData;
 
+	protected const FUNCTIONS_GET = null;
+	protected const FUNCTIONS_GET_BY_FIELD = null;
+
     public function __construct()
     {
     }
@@ -18,6 +21,14 @@ abstract class ModelBase
         $response = $call->execute();
         return $response;
     }
+
+	protected function checkFunctionKey(string $sFunctionKey) {
+		
+		if(static::$sFunctionKey === null) {
+			throw new \Exception('Function key "'.$sFunctionKey.'" not defined!');
+		}
+		
+	}
 
     public function fromArray($data)
     {
@@ -124,6 +135,10 @@ abstract class ModelBase
 
     // Static methods
 
+	/**
+	 * 
+	 * @return static
+	 */
     public static function instance()
     {
         $c = get_called_class();
